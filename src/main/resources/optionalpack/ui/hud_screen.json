@@ -8,7 +8,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "((#text - ' ') = #text)",
+        "source_property_name": "((('%02s' * #text) = #text) or ((#text - ' ') = #text))",
         "target_property_name": "#visible"
       }
     ]
