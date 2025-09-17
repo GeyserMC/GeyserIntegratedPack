@@ -1,1 +1,9 @@
-{"minecraft:client_entity": {"description": {"textures": {"illusioner": "textures/geyser/entity/illager/illusioner"}}}}
+{
+  "minecraft:client_entity": {
+    "description": {
+      "textures": {
+        "illusioner": "textures/geyser/entity/illager/illusioner"
+      }
+    }
+  }
+}
