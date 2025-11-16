@@ -1,4 +1,4 @@
-package org.geysermc.optionalpack;
+package org.geysermc.integratedpack;
 
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 public class LauncherMetaWrapper {
-    private static final Path CLIENT_JAR = OptionalPack.TEMP_PATH.resolve("client.jar");
+    private static final Path CLIENT_JAR = IntegratedPack.TEMP_PATH.resolve("client.jar");
     private static final String LAUNCHER_META_URL = "https://launchermeta.mojang.com/mc/game/version_manifest.json";
 
     public static Path getLatest() {
-        OptionalPack.log("Downloading " + Constants.JAVA_TARGET_VERSION + " client.jar from Mojang...");
+        IntegratedPack.log("Downloading " + Constants.JAVA_TARGET_VERSION + " client.jar from Mojang...");
 
         VersionManifest versionManifest = Constants.GSON.fromJson(WebUtils.getAsString(LAUNCHER_META_URL), VersionManifest.class);
 
@@ -28,7 +28,7 @@ public class LauncherMetaWrapper {
                         throw new RuntimeException("Could not download client jar", e);
                     }
                 } else {
-                    OptionalPack.log("Client jar already exists and is up to date.");
+                    IntegratedPack.log("Client jar already exists and is up to date.");
                 }
             }
         }

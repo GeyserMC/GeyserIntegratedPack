@@ -20,10 +20,10 @@
  * THE SOFTWARE.
  *
  * @author GeyserMC
- * @link https://github.com/GeyserMC/GeyserOptionalPack
+ * @link https://github.com/GeyserMC/GeyserIntegratedPack
  */
 
-package org.geysermc.optionalpack;
+package org.geysermc.integratedpack;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -56,15 +56,15 @@ public class JavaResources {
                 String destinationPath = paths[1];
                 InputStream asset = getAsStream(jarAssetPath);
 
-                OptionalPack.log("Copying " + jarAssetPath + " to " + destinationPath + "...");
+                IntegratedPack.log("Copying " + jarAssetPath + " to " + destinationPath + "...");
 
                 String assetFileName = Path.of(jarAssetPath).toFile().getName();
-                Path destination = OptionalPack.WORKING_PATH.resolve(destinationPath).resolve(assetFileName);
+                Path destination = IntegratedPack.WORKING_PATH.resolve(destinationPath).resolve(assetFileName);
 
-                File destinationFolder = OptionalPack.WORKING_PATH.resolve(destinationPath).toFile();
+                File destinationFolder = IntegratedPack.WORKING_PATH.resolve(destinationPath).toFile();
                 if (!destinationFolder.exists()) {
                     if (!destinationFolder.mkdirs()) {
-                        OptionalPack.log("Could not make directories for copying " + jarAssetPath + " to " + destinationPath + "!");
+                        IntegratedPack.log("Could not make directories for copying " + jarAssetPath + " to " + destinationPath + "!");
                         continue;
                     }
                 }

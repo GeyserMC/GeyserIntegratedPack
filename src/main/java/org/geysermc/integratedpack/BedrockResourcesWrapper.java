@@ -1,4 +1,4 @@
-package org.geysermc.optionalpack;
+package org.geysermc.integratedpack;
 
 import java.io.InputStream;
 

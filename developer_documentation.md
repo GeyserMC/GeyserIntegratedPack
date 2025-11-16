@@ -22,7 +22,7 @@
 
 ### Introduction
 
-The GeyserOptionalPack is compiled using a program written in Java. It contains various renderers and utilities for converting Java Edition assets into a format that works with Geyser to work on Bedrock Edition.
+The GeyserIntegratedPack is compiled using a program written in Java. It contains various renderers and utilities for converting Java Edition assets into a format that works with Geyser to work on Bedrock Edition.
 
 Entity data and entity flags (known as queries in Molang) are pieces of metadata that store various pieces of information about an entity on the Bedrock Edition of Minecraft. You can query for an entity's health, for example (a number query or an entity data), and can query for if an entity is angry (an entity flag, which is either 1.0 or 0.0 in Molang). Not all entities use every query, but every entity has access to most queries, though Bedrock by default ignores these. These queries can be sent by Geyser and change how an entity looks. We use this to our advantage in this resource pack.
 
@@ -76,7 +76,7 @@ v.head_scale = q.is_item_name_any('slot.armor.head', 0, 'minecraft:skull', 'mine
 
 The illusioner does not exist in Bedrock Edition. Full implementation, however, would require more than a simple texture swap. This is due to the illusioner's special attack, which creates four duplicate false illusioners, which lack a hit box. The actual illusioner remains invisible during this attack. Implementing this would likely be possible from a technical perspective, but it would require either some kind of helper entity attached to the illusioner by Geyser, such as an invisible armor stand, or the removal of invisibility during the illusioner's special attack. The former would be preferable, as it would maintain some degree of functionality for users without the pack.
 
-Currently, the optional pack uses a render controller to perform a simple texture swap on the illusioner. This is accomplished by replacing the evocation illager with the illusioner when the evocation illager returns true for the Molang query `q.is_bribed`. The following texture array is defined in the render controller:
+Currently, the integrated pack uses a render controller to perform a simple texture swap on the illusioner. This is accomplished by replacing the evocation illager with the illusioner when the evocation illager returns true for the Molang query `q.is_bribed`. The following texture array is defined in the render controller:
 
 ```json
 {
@@ -115,29 +115,29 @@ Both Java Edition and Bedrock Edition have offhand support, though Bedrock is ve
 
 The pack replaces many particles that are not displayed for various reasons. Some cannot be displayed due to Bedrock's lack of ability to spawn particles with data from required builtin variables. Others simply do not exist in Bedrock edition. The table below summarizes the particle changes implemented by this pack.
 
-|   Java (`minecraft:`)   |  Bedrock (`minecraft:`) | Optional Pack (`geyseropt:`) |                                           Notes                                          |
-|:-----------------------:|:-----------------------:|:----------------------------:|:----------------------------------------------------------------------------------------:|
-|          `ash`          |            -            |             `ash`            |                              Not present in Bedrock Edition                              |
-|        `barrier`        |            -            |           `barrier`          |                     Present in Bedrock Edition, but not as a particle                    |
-|         `bubble`        |  `basic_bubble_manual`  |               -              | Modified version of the basic_bubble_manual particle is used to spawn in all block types |
-|     `crimson_spore`     |            -            |        `crimson_spore`       |                              Not present in Bedrock Edition                              |
-|    `damage_indicator`   |            -            |      `damage_indicator`      |                              Not present in Bedrock Edition                              |
-|     `enchanted_hit`     |            -            |    `enchanted_hit_single`    |                              Not present in Bedrock Edition                              |
-|            -            |            -            |   `enchanted_hit_multiple`   |                  Used for playing multiple scattered particles on attack                 |
-|         `flash`         |            -            |            `flash`           |                              Not present in Bedrock Edition                              |
-|     `landing_honey`     |            -            |        `landing_honey`       |                              Not present in Bedrock Edition                              |
-|      `landing_lava`     |            -            |        `landing_lava`        |                              Not present in Bedrock Edition                              |
-| `landing_obsidian_tear` |            -            |    `landing_obsidian_tear`   |                              Not present in Bedrock Edition                              |
-|        `nautilus`       |            -            |          `nautilus`          |                              Not present in Bedrock Edition                              |
-|         `sneeze`        |            -            |           `sneeze`           |  Part of Bedrock Edition as a variant of redstone dust (local use only in optional pack) |
-|      `sweep_attack`     |            -            |        `sweep_attack`        |                              Not present in Bedrock Edition                              |
-|       `underwater`      |            -            |         `underwater`         |                              Not present in Bedrock Edition                              |
-|      `warped_spore`     |            -            |        `warped_spore`        |                              Not present in Bedrock Edition                              |
-|       `white_ash`       |            -            |          `white_ash`         |                              Not present in Bedrock Edition                              |
+|   Java (`minecraft:`)   |  Bedrock (`minecraft:`) | Integrated Pack (`geyseropt:`) for legacy reasons |                                           Notes                                           |
+|:-----------------------:|:-----------------------:|:-------------------------------------------------:|:-----------------------------------------------------------------------------------------:|
+|          `ash`          |            -            |                       `ash`                       |                              Not present in Bedrock Edition                               |
+|        `barrier`        |            -            |                     `barrier`                     |                     Present in Bedrock Edition, but not as a particle                     |
+|         `bubble`        |  `basic_bubble_manual`  |                         -                         | Modified version of the basic_bubble_manual particle is used to spawn in all block types  |
+|     `crimson_spore`     |            -            |                  `crimson_spore`                  |                              Not present in Bedrock Edition                               |
+|    `damage_indicator`   |            -            |                `damage_indicator`                 |                              Not present in Bedrock Edition                               |
+|     `enchanted_hit`     |            -            |              `enchanted_hit_single`               |                              Not present in Bedrock Edition                               |
+|            -            |            -            |             `enchanted_hit_multiple`              |                  Used for playing multiple scattered particles on attack                  |
+|         `flash`         |            -            |                      `flash`                      |                              Not present in Bedrock Edition                               |
+|     `landing_honey`     |            -            |                  `landing_honey`                  |                              Not present in Bedrock Edition                               |
+|      `landing_lava`     |            -            |                  `landing_lava`                   |                              Not present in Bedrock Edition                               |
+| `landing_obsidian_tear` |            -            |              `landing_obsidian_tear`              |                              Not present in Bedrock Edition                               |
+|        `nautilus`       |            -            |                    `nautilus`                     |                              Not present in Bedrock Edition                               |
+|         `sneeze`        |            -            |                     `sneeze`                      | Part of Bedrock Edition as a variant of redstone dust (local use only in integrated pack) |
+|      `sweep_attack`     |            -            |                  `sweep_attack`                   |                              Not present in Bedrock Edition                               |
+|       `underwater`      |            -            |                   `underwater`                    |                              Not present in Bedrock Edition                               |
+|      `warped_spore`     |            -            |                  `warped_spore`                   |                              Not present in Bedrock Edition                               |
+|       `white_ash`       |            -            |                    `white_ash`                    |                              Not present in Bedrock Edition                               |
 
 #### Sweep attack
 
-Of note, the texture for the sweep attack particle is built using the GeyserOptionalPackCompiler. This creates what is effectively a sprite sheet, and then the UV of the particle is animated from the particle definition. The UV animation in the particle definition is defined as follows:
+Of note, the texture for the sweep attack particle is built using the GeyserIntegratedPackCompiler. This creates what is effectively a sprite sheet, and then the UV of the particle is animated from the particle definition. The UV animation in the particle definition is defined as follows:
 
 ```jsonc
 {
@@ -153,7 +153,7 @@ Of note, the texture for the sweep attack particle is built using the GeyserOpti
 }
 ```
 
-The class for rendering the sweep attack texture can be found here: [SweepAttackRenderer.java](https://github.com/GeyserMC/GeyserOptionalPack/blob/master/src/main/java/org/geysermc/optionalpack/renderers/SweepAttackRenderer.java)
+The class for rendering the sweep attack texture can be found here: [SweepAttackRenderer.java](https://github.com/GeyserMC/GeyserIntegratedPack/blob/master/src/main/java/org/geysermc/integratedpack/renderers/SweepAttackRenderer.java)
 
 ### Phantoms
 
@@ -198,9 +198,9 @@ On Java Edition, you are able to toggle your cape and second skin layers. Bedroc
 math.mod(math.floor(q.mark_variant / 32), 2) != 1
 ```
 
-Do note that Geyser does invert the bits - that way, on other servers without the GeyserOptionalPack, `q.mark_variant` being 0 means that all parts should be shown. Java interprets 0 to mean all parts are invisible.
+Do note that Geyser does invert the bits - that way, on other servers without the GeyserIntegratedPack, `q.mark_variant` being 0 means that all parts should be shown. Java interprets 0 to mean all parts are invisible.
 
-Also note that capes are technically possible to implement without the OptionalPack, but this requires re-sending the skin data to Bedrock Edition which would be costly on performance and network usage.
+Also note that capes are technically possible to implement without the IntegratedPack, but this requires re-sending the skin data to Bedrock Edition which would be costly on performance and network usage.
 
 ### Shulkers
 
@@ -354,7 +354,7 @@ Hiding the 2x2 crafting grid is a bit more involved. We have to use bindings to 
 ```
 
 This uses the `#is_creative_mode` binding, and applies it to the crafting panel. Note that we insert this modification into the bindings array
-instead of directly modifying the UI - this allows the GeyserOptionalPack to stay compatible with other resource packs that modify this screen.
+instead of directly modifying the UI - this allows the GeyserIntegratedPack to stay compatible with other resource packs that modify this screen.
 
 ### Structure block texture changes (MCPE-48224)
 
@@ -397,7 +397,7 @@ Likely due to a copy and paste mistake as the bamboo and nether wood fence gates
 
 This `toggle4` sound does not exist in Bedrock Editions's default resources, meaning that sometimes the Cherry Fence Gate can play no sound.
 
-Both Java and Bedrock don't have this sound, so GeyserOptionalPack fixes this by redefining these sound events, and removing `toggle4` from the `sound_definitions.json` as seen below:
+Both Java and Bedrock don't have this sound, so GeyserIntegratedPack fixes this by redefining these sound events, and removing `toggle4` from the `sound_definitions.json` as seen below:
 
 ```json
 "close.cherry_wood_fence_gate": {

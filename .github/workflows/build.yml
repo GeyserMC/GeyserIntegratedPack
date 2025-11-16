@@ -26,36 +26,36 @@ jobs:
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
         if: success()
         with:
-          name: GeyserOptionalPack
-          path: GeyserOptionalPack.mcpack
+          name: GeyserIntegratedPack
+          path: GeyserIntegratedPack.mcpack
           
       - name: Get Version
-        if: ${{ success() && github.repository == 'GeyserMC/GeyserOptionalPack' && github.ref_name == 'master' }}
+        if: ${{ success() && github.repository == 'GeyserMC/GeyserIntegratedPack' && github.ref_name == 'master' }}
         id: get-version
         run: |
-          version=$(cat src/main/resources/optionalpack/manifest.json | jq -r '.header.version | join(".")')
+          version=$(cat src/main/resources/integratedpack/manifest.json | jq -r '.header.version | join(".")')
           echo "VERSION=${version}" >> $GITHUB_OUTPUT
 
       - name: Get Release Metadata
-        if: ${{ success() && github.repository == 'GeyserMC/GeyserOptionalPack' && github.ref_name == 'master' }}
+        if: ${{ success() && github.repository == 'GeyserMC/GeyserIntegratedPack' && github.ref_name == 'master' }}
         uses: GeyserMC/actions/release@master
         id: metadata
         with:
           appID: ${{ secrets.RELEASE_APP_ID }}
           appPrivateKey: ${{ secrets.RELEASE_APP_PK }}
           files: |
-            geyseroptionalpack:GeyserOptionalPack.mcpack
+            geyserintegratedpack:GeyserIntegratedPack.mcpack
           releaseEnabled: false
           saveMetadata: true
-          releaseProject: 'geyseroptionalpack'
+          releaseProject: 'geyserintegratedpack'
           releaseVersion: ${{ steps.get-version.outputs.VERSION }}
 
       - name: Publish to Downloads API
-        if: ${{ success() && github.repository == 'GeyserMC/GeyserOptionalPack' && github.ref_name == 'master' }}
+        if: ${{ success() && github.repository == 'GeyserMC/GeyserIntegratedPack' && github.ref_name == 'master' }}
         uses: GeyserMC/actions/upload-release@master
         with:
           username: ${{ vars.DOWNLOADS_USERNAME }}
           privateKey: ${{ secrets.DOWNLOADS_PRIVATE_KEY }}
           host: ${{ secrets.DOWNLOADS_SERVER_IP }}
           files: |
-            GeyserOptionalPack.mcpack
+            GeyserIntegratedPack.mcpack
