@@ -1,2 +1,2 @@
-rootProject.name = "GeyserOptionalPackCompiler"
+rootProject.name = "GeyserIntegratedPackCompiler"
 

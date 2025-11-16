@@ -20,10 +20,10 @@
  * THE SOFTWARE.
  *
  * @author GeyserMC
- * @link https://github.com/GeyserMC/GeyserOptionalPack
+ * @link https://github.com/GeyserMC/GeyserIntegratedPack
  */
 
-package org.geysermc.optionalpack;
+package org.geysermc.integratedpack;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,7 +43,7 @@ public class WebUtils {
             URLConnection cn = url.openConnection();
             cn.setConnectTimeout(5000);
             // TODO: proper versioning here
-            cn.setRequestProperty("User-Agent", "GeyserMC/GeyserOptionalPackCompiler/1.0.0");
+            cn.setRequestProperty("User-Agent", "GeyserMC/GeyserIntegratedPackCompiler/1.0.0");
             cn.connect();
             return cn.getInputStream();
         } catch (IOException e) {

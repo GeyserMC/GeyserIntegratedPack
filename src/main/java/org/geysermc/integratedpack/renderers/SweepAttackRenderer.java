@@ -20,52 +20,28 @@
  * THE SOFTWARE.
  *
  * @author GeyserMC
- * @link https://github.com/GeyserMC/GeyserOptionalPack
+ * @link https://github.com/GeyserMC/GeyserIntegratedPack
  */
 
-package org.geysermc.optionalpack.renderers;
+package org.geysermc.integratedpack.renderers;
 
-import org.geysermc.optionalpack.OptionalPack;
+import java.util.List;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.nio.file.Path;
+/**
+ * Output of this renderer is used by integratedpack/particles/sweep_attack.particle.json
+ */
+public class SweepAttackRenderer extends VerticalSpriteSheetRenderer {
 
-public interface Renderer {
-    /**
-     * Gets the name of the renderer for logging in the console.
-     *
-     * @return The name of the renderer.
-     */
-    String getName();
-
-    /**
-     * Gets the destination path for the rendered output.
-     *
-     * @return The destination path as a String.
-     */
-    default String getDestination() {
-        return "";
-    }
-
-    /**
-     * Gets the destination path as a Path object, or null if no destination is set.
-     *
-     * @return The destination path
-     */
-    default Path getDestinationPath() {
-        String destination = getDestination();
-        return OptionalPack.WORKING_PATH.resolve(destination);
-    }
-
-    /**
-     * Renders the output of the renderer.
-     *
-     * @throws IOException If an error occurs during rendering.
-     */
-    void render() throws IOException;
-
-    default void log(String message) {
-        OptionalPack.log(message);
+    public SweepAttackRenderer() {
+        super("Sweep Attack", "textures/geyser/particle/sweep_attack.png", List.of(
+                "assets/minecraft/textures/particle/sweep_0.png",
+                "assets/minecraft/textures/particle/sweep_1.png",
+                "assets/minecraft/textures/particle/sweep_2.png",
+                "assets/minecraft/textures/particle/sweep_3.png",
+                "assets/minecraft/textures/particle/sweep_4.png",
+                "assets/minecraft/textures/particle/sweep_5.png",
+                "assets/minecraft/textures/particle/sweep_6.png",
+                "assets/minecraft/textures/particle/sweep_7.png"
+        ));
     }
 }

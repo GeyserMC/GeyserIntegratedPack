@@ -1,8 +1,11 @@
-# GeyserOptionalPack
+# GeyserIntegratedPack
 
-Optional Bedrock resource pack to extend Geyser functionality. Learn more on its [wiki page](https://geysermc.org/wiki/other/geyseroptionalpack).
+> [!IMPORTANT]  
+> The GeyserIntegratedPack is now included in Geyser. You no longer need to manually add it!
+> If you were using the GeyserOptionalPack before, we recommend removing it.
 
-Download: [GeyserOptionalPack.mcpack](https://download.geysermc.org/v2/projects/geyseroptionalpack/versions/latest/builds/latest/downloads/geyseroptionalpack)
+Bedrock resource pack to extend Geyser functionality. Learn more on its [wiki page](https://geysermc.org/wiki/other/geyserintegratedpack).
+
 
 ### Implements
 
@@ -20,11 +23,13 @@ Download: [GeyserOptionalPack.mcpack](https://download.geysermc.org/v2/projects/
   - Tick-delay and rename fields in the command block menu
   - Structure block options that do not exist on Java
 
+Download: [GeyserIntegratedPack.mcpack](https://download.geysermc.org/v2/projects/geyserintegratedpack/versions/latest/builds/latest/downloads/geyserintegratedpack)
+
 ### Manually compiling the pack
 
 1. Clone the repo to your computer
 2. Run `gradlew run`.
-3. When it finishes compiling, it will output the `GeyserOptionalPack.mcpack`.
+3. When it finishes compiling, it will output the `GeyserIntegratedPack.mcpack`.
 
 ### Legal
 

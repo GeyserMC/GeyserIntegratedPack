@@ -20,40 +20,32 @@
  * THE SOFTWARE.
  *
  * @author GeyserMC
- * @link https://github.com/GeyserMC/GeyserOptionalPack
+ * @link https://github.com/GeyserMC/GeyserIntegratedPack
  */
 
-package org.geysermc.optionalpack;
+package org.geysermc.integratedpack;
 
-import org.geysermc.optionalpack.renderers.Renderer;
-import org.geysermc.optionalpack.renderers.SweepAttackRenderer;
+import org.geysermc.integratedpack.renderers.Renderer;
 import org.reflections.Reflections;
 
-import javax.imageio.ImageIO;
-import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-import java.util.zip.ZipInputStream;
-import java.util.zip.ZipOutputStream;
 
-public class OptionalPack {
+public class IntegratedPack {
     public static final Path TEMP_PATH = Path.of("temp");
-    public static final Path WORKING_PATH = TEMP_PATH.resolve("optionalpack");
+    public static final Path WORKING_PATH = TEMP_PATH.resolve("integratedpack");
 
     private static final Renderer[] RENDERERS;
 
     static {
-        Reflections reflections = new Reflections("org.geysermc.optionalpack.renderers");
+        Reflections reflections = new Reflections("org.geysermc.integratedpack.renderers");
         Set<Class<? extends Renderer>> renderers = reflections.getSubTypesOf(Renderer.class);
 
         RENDERERS = renderers.stream().map(rendererClass -> {
@@ -68,13 +60,13 @@ public class OptionalPack {
     public static void main(String[] args) {
         Instant start = Instant.now();
         try {
-            log("===GeyserOptionalPack Compiler===");
+            log("===GeyserIntegratedPack Compiler===");
 
-            // Step 1: Extract the GeyserOptionalPack data to a working folder
+            // Step 1: Extract the GeyserIntegratedPack data to a working folder
 
-            log("Extracting pre-made optional pack data to folder...");
+            log("Extracting pre-made integrated pack data to folder...");
             // there are probably better ways to do this, but this is the way im doing it
-            Resources.extractFolder("optionalpack", WORKING_PATH);
+            Resources.extractFolder("integratedpack", WORKING_PATH);
 
             // Step 2: Download the 1.21.8 client.jar and copy all files needed to working folder
             File jarFile = LauncherMetaWrapper.getLatest().toFile();
@@ -95,8 +87,8 @@ public class OptionalPack {
             }
 
             // Step 4: Compile pack folder into a mcpack.
-            log("Zipping as GeyserOptionalPack.mcpack...");
-            FileUtils.zipFolder(WORKING_PATH, Path.of("GeyserOptionalPack.mcpack"));
+            log("Zipping as GeyserIntegratedPack.mcpack...");
+            FileUtils.zipFolder(WORKING_PATH, Path.of("GeyserIntegratedPack.mcpack"));
 
             // Step 5: Cleanup temporary folders and files
             log("Clearing temporary files...");

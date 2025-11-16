@@ -1,13 +1,13 @@
-package org.geysermc.optionalpack.renderers;
+package org.geysermc.integratedpack.renderers;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.geysermc.optionalpack.BedrockResourcesWrapper;
-import org.geysermc.optionalpack.Constants;
-import org.geysermc.optionalpack.FileUtils;
-import org.geysermc.optionalpack.OptionalPack;
-import org.geysermc.optionalpack.Resources;
+import org.geysermc.integratedpack.BedrockResourcesWrapper;
+import org.geysermc.integratedpack.Constants;
+import org.geysermc.integratedpack.FileUtils;
+import org.geysermc.integratedpack.IntegratedPack;
+import org.geysermc.integratedpack.Resources;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class JsonPatchRenderer implements Renderer {
-    private static final Path PATCHES_PATH = OptionalPack.TEMP_PATH.resolve("patches");
+    private static final Path PATCHES_PATH = IntegratedPack.TEMP_PATH.resolve("patches");
 
     @Override
     public String getName() {
@@ -55,7 +55,7 @@ public class JsonPatchRenderer implements Renderer {
 
         JsonObject merged = mergeJsonObjects(sourceJson, patchJson);
 
-        try (FileWriter writer = new FileWriter(OptionalPack.WORKING_PATH.resolve(realPath).toFile())) {
+        try (FileWriter writer = new FileWriter(IntegratedPack.WORKING_PATH.resolve(realPath).toFile())) {
             writer.write(Constants.GSON.toJson(merged));
         }
     }

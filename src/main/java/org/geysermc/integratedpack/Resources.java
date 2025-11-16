@@ -20,10 +20,10 @@
  * THE SOFTWARE.
  *
  * @author GeyserMC
- * @link https://github.com/GeyserMC/GeyserOptionalPack
+ * @link https://github.com/GeyserMC/GeyserIntegratedPack
  */
 
-package org.geysermc.optionalpack;
+package org.geysermc.integratedpack;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

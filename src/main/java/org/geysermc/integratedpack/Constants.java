@@ -1,4 +1,4 @@
-package org.geysermc.optionalpack;
+package org.geysermc.integratedpack;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
