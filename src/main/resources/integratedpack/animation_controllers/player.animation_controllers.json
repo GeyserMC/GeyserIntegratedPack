@@ -30,7 +30,10 @@
 						},
 						{
 							"first_person_breathing_bob": "variable.attack_time <= 0.0"
-						}
+						},
+						{
+                            "first_person_melee_spear_controller": "variable.melee_spear_equipped"
+                        }
 					],
 					"transitions" : [
 						{
