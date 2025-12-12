@@ -13,7 +13,7 @@
 							"first_person_shield_block": "query.blocking"
 						},
 						{
-							"first_person_attack_controller" : "variable.attack_time > 0.0f && query.get_equipped_item_name != 'filled_map'"
+							"first_person_attack_controller" : "variable.attack_time > 0.0 && query.get_equipped_item_name != 'filled_map' && !variable.melee_spear_equipped"
 						},
 						"first_person_base_pose",
 						{

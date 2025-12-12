@@ -4,7 +4,7 @@
         "description": "Bedrock resource pack to extend Geyser functionality",
         "name": "GeyserIntegratedPack",
         "uuid": "2254393d-8430-45b0-838a-bd397828c765",
-        "version": [1, 0, 2],
+        "version": [1, 0, 3],
         "min_engine_version": [ 1, 16, 0 ]
     },
     "modules": [
@@ -12,7 +12,7 @@
             "description": "GeyserIntegratedPack",
             "type": "resources",
             "uuid": "4d60881b-e4ed-466f-925c-8abc873151ba",
-            "version": [1, 0, 2]
+            "version": [1, 0, 3]
         }
     ]
 }
