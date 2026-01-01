@@ -4,3 +4,4 @@ assets/minecraft/textures/particle/damage.png textures/geyser/particle/
 assets/minecraft/textures/particle/flash.png textures/geyser/particle/
 assets/minecraft/textures/particle/nautilus.png textures/geyser/particle/
 assets/minecraft/textures/entity/illager/illusioner.png textures/geyser/entity/illager/
+assets/minecraft/textures/misc/forcefield.png textures/geyser/misc/
