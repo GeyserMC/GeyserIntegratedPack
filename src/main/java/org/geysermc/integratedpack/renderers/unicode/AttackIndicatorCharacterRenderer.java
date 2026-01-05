@@ -31,19 +31,34 @@ public class AttackIndicatorCharacterRenderer implements UnicodeCharacterRendere
             BufferedImage emptyAttackIndicator = JavaResources.getAsImage(CROSSHAIR_ATTACK_INDICATOR_EMPTY);
             BufferedImage progressAttackIndicator = JavaResources.getAsImage(CROSSHAIR_ATTACK_INDICATOR_PROGRESS);
 
-            for (int i = 0; i < progressAttackIndicator.getWidth() + 1; i++) {
-                BufferedImage canvas = new BufferedImage(emptyAttackIndicator.getWidth(), emptyAttackIndicator.getWidth(), BufferedImage.TYPE_INT_ARGB); // Ensures square
+            float scale = emptyAttackIndicator.getWidth() / 16f;
+            int intScale = (int) scale;
+
+            for (int i = 0; i < 16 + 1; i++) {
+                int size = (int) scale * 18;
+                BufferedImage canvas = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB); // Ensures square
                 Graphics g = canvas.getGraphics();
 
                 // Do not center, keeps in line with ATTACK_INDICATOR_FULL which puts it at the top
-                g.drawImage(emptyAttackIndicator, 0, 0, null);
+                g.drawImage(emptyAttackIndicator, intScale, intScale, null);
                 if (i != 0) { // Errors when i = 0
-                    g.drawImage(ImageUtil.crop(progressAttackIndicator, i, progressAttackIndicator.getHeight()), 0, 0, null);
+                    g.drawImage(ImageUtil.crop(progressAttackIndicator, i, progressAttackIndicator.getHeight()), intScale, intScale, null);
                 }
                 images.add(canvas);
             }
 
-            images.add(JavaResources.getAsImage(CROSSHAIR_ATTACK_INDICATOR_FULL));
+            BufferedImage fullAttackIndicator = JavaResources.getAsImage(CROSSHAIR_ATTACK_INDICATOR_FULL);
+
+            scale = fullAttackIndicator.getWidth() / 16f;
+            intScale = (int) scale;
+            int size = (int) scale * 18;
+            BufferedImage canvas = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB); // Ensures square
+            Graphics g = canvas.getGraphics();
+
+            // Do not center, keeps in line with ATTACK_INDICATOR_FULL which puts it at the top
+            g.drawImage(fullAttackIndicator, intScale, intScale, null);
+
+            images.add(canvas);
         }
 
         // Hotbar

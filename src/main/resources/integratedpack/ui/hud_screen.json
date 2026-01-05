@@ -1,31 +1,204 @@
 {
-  "hud_title_text/title_frame/title_background": {
+  // Preserved Display, adapted from wiki.bedrock.dev
+  "preserved_display": {
+    "type": "label",
+    "text": "#text",
+    "localize": false,
+    "shadow": false,
+    "controls": [
+      {
+        "data_control": {
+          "type": "panel",
+          "size": [0, 0],
+          "property_bag": {
+            "#preserved_text": ""
+          },
+          "bindings": [
+            {
+              "binding_name": "#hud_title_text_string"
+            },
+            {
+              "binding_name": "#hud_title_text_string",
+              "binding_name_override": "#preserved_text",
+              "binding_condition": "visibility_changed"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(not (#hud_title_text_string = #preserved_text) and not ((#hud_title_text_string - $update_string) = #hud_title_text_string))",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      }
+    ],
     "bindings": [
       {
-        "binding_name": "#hud_title_text_string",
-        "binding_name_override": "#text",
-        "binding_type": "global"
-      },
-      {
         "binding_type": "view",
-        "source_property_name": "((not (('%.1s' * #text) = #text)) or ((#text - ' ') = #text))",
-        "target_property_name": "#visible"
+        "source_control_name": "data_control",
+        "source_property_name": "(#preserved_text - $update_string)",
+        "target_property_name": "#text"
       }
     ]
-  }
-  ,
-  "hud_title_text/subtitle_frame/subtitle_background": {
+  },
+
+  "chat_grid_item": {
     "bindings": [
       {
-        "binding_name": "#hud_subtitle_text_string",
-        "binding_name_override": "#text",
-        "binding_type": "global"
+        "binding_name": "#chat_text",
+        "binding_name_override": "#chat_message",
+        "binding_type": "collection",
+        "binding_collection_name": "chat_text_grid",
+        "binding_condition": "once"
       },
       {
-        "binding_type": "view",
-        "source_property_name": "((#text - '˙') = #text)",
-        "target_property_name": "#visible"
+        "binding_name": "(not #on_new_death_screen)",
+        "binding_name_override": "#visible"
+      },
+      {
+        "binding_name": "((#chat_message - $geyser_data_transfer_string) = #chat_message)",
+        "binding_name_override": "#visible"
       }
     ]
+  },
+  "chat_panel/stack_panel": {
+    "factory": {
+      "name": "chat_item_factory",
+      "control_ids": {
+        "chat_item": "chat_item@hud.chat_grid_item"
+      }
+    }
+  },
+
+  // Animations
+  "geyser_anim_title_kill": {
+    "anim_type": "alpha",
+    "easing": "linear",
+    "duration": 0.1,
+    "from": 0,
+    "to": 0,
+    "destroy_at_end": "hud_title_text"
+  },
+
+  // Animation modifications
+  "anim_title_text_alpha_in": {
+    "duration": "$preserved_in_time"
+  },
+  "anim_title_text_alpha_stay": {
+    "duration": "$preserved_stay_time"
+  },
+  "anim_title_text_alpha_out": {
+    "duration": "$preserved_out_time",
+    "destroy_at_end": null
+  },
+  "anim_title_background_alpha_out": {
+    "destroy_at_end": null
+  },
+
+  // Geyser added elements
+  "geyser_crosshair_cooldown@hud.preserved_display": {
+    "$update_string": "geyseropt:title_preserve_cooldown_crosshair",
+    "text_alignment": "center",
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "offset": [ 0, 19 ],
+    "font_size": "normal"
+  },
+  "geyser_hotbar_cooldown@hud.preserved_display": {
+    "$update_string": "geyseropt:title_preserve_cooldown_hotbar",
+    "text_alignment": "center",
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "offset": [ "50%", "50%" ],
+    "font_size": "normal"
+  },
+  "geyser_fake_title@hud.hud_title_text": {
+    "alpha": "#alpha",
+    "$preserved_in_time": "#preserved_in_time",
+    "$preserved_stay_time": "#preserved_stay_time",
+    "$preserved_out_time": "#preserved_out_time",
+    "controls": [
+      {
+        "title_frame@hud.hud_title_text/title_frame": {
+          "controls": [
+            {
+              "title_background@hud.hud_title_text/title_frame/title_background": {}
+            },
+            {
+              "title@hud.hud_title_text/title_frame/title": {
+                "text": "#preserved_title",
+                "controls": [
+                  {
+                    "data_control": {
+                      "type": "panel",
+                      "size": [0, 0],
+                      "property_bag": {
+                        "#preserved_title": "",
+                        "#preserved_in_time": 10,
+                        "#preserved_stay_time": 70,
+                        "#preserved_out_time": 20,
+                        "#alpha": 0
+                      },
+                      "bindings": [
+                        {
+                          "binding_name": "#hud_title_text_string"
+                        },
+                        {
+                          "binding_name": "#hud_title_text_string",
+                          "binding_name_override": "#preserved_title",
+                          "binding_condition": "visibility_changed"
+                        },
+                        {
+                          "binding_name": "$title_fade_in_time",
+                          "binding_name_override": "#preserved_in_time",
+                          "binding_condition": "visibility_changed"
+                        },
+                        {
+                          "binding_name": "$title_stay_time",
+                          "binding_name_override": "#preserved_stay_time",
+                          "binding_condition": "visibility_changed"
+                        },
+                        {
+                          "binding_name": "$title_fade_out_time",
+                          "binding_name_override": "#preserved_out_time",
+                          "binding_condition": "visibility_changed"
+                        },
+                        {
+                          "binding_name": "@hud.anim_title_text_alpha_in",
+                          "binding_name_override": "#alpha",
+                          "binding_condition": "visibility_changed"
+                        },
+                        {
+                          "binding_type": "view",
+                          "source_property_name": "((#hud_title_text_string - 'geyseropt:title_preserve_') = #hud_title_text_string)",
+                          "target_property_name": "#visible"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  // Element modification
+  "root_panel": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": [
+          { "geyser_crosshair_cooldown@hud.geyser_crosshair_cooldown": {} },
+          { "geyser_hotbar_cooldown@hud.geyser_hotbar_cooldown": {} },
+          { "geyser_fake_title@hud.geyser_fake_title": {} }
+        ]
+      }
+    ]
+  },
+  "hud_title_text": {
+    "alpha": "@hud.geyser_anim_title_kill"
   }
 }
