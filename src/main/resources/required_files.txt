@@ -4,4 +4,7 @@ assets/minecraft/textures/particle/damage.png textures/geyser/particle/
 assets/minecraft/textures/particle/flash.png textures/geyser/particle/
 assets/minecraft/textures/particle/nautilus.png textures/geyser/particle/
 assets/minecraft/textures/entity/illager/illusioner.png textures/geyser/entity/illager/
-assets/minecraft/textures/misc/forcefield.png textures/geyser/misc/
+assets/minecraft/textures/gui/sprites/hud/crosshair_attack_indicator_progress.png textures/geyser/ui/
+assets/minecraft/textures/gui/sprites/hud/crosshair_attack_indicator_background.png textures/geyser/ui/
+assets/minecraft/textures/gui/sprites/hud/hotbar_attack_indicator_progress.png textures/geyser/ui/
+assets/minecraft/textures/gui/sprites/hud/hotbar_attack_indicator_background.png textures/geyser/ui/

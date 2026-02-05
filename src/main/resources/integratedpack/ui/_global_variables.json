@@ -1,9 +1,0 @@
-{
-    // The §z is there to prevent regular messages being marked as data transfer
-    // Any occurance of "geyser§zopt:data_transfer_" found in Geyser will be
-    // replaced with "geyseropt:data_transfer_" since §z becomes invisible
-    "$geyser_data_transfer_string": "geyser§zopt:data_transfer_",
-
-    "$geyser_crosshair_attack_indicator": "geyser§zopt:data_transfer_crosshair_attack_indicator",
-    "$geyser_hotbar_attack_indicator": "geyser§zopt:data_transfer_hotbar_attack_indicator"
-}
