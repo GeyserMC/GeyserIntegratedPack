@@ -107,8 +107,8 @@
     "cooldown_hotbar": {
         "type": "panel",
         "size": [
-            16,
-            16
+            18,
+            18
         ],
         "offset": [
             4,
