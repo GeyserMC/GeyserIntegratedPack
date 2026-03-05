@@ -22,6 +22,8 @@ Bedrock resource pack to extend Geyser functionality. Learn more on its [wiki pa
   - 2x2 crafting grid while in creative mode
   - Tick-delay and rename fields in the command block menu
   - Structure block options that do not exist on Java
+- 1, 2, 4 and 5 row chests, removing the need for the filler item
+- Proper attack cooldowns
 
 Download: [GeyserIntegratedPack.mcpack](https://download.geysermc.org/v2/projects/geyserintegratedpack/versions/latest/builds/latest/downloads/geyserintegratedpack)
 
@@ -30,6 +32,11 @@ Download: [GeyserIntegratedPack.mcpack](https://download.geysermc.org/v2/project
 1. Clone the repo to your computer
 2. Run `gradlew run`.
 3. When it finishes compiling, it will output the `GeyserIntegratedPack.mcpack`.
+
+### Credits
+
+- [Sweep 'N Slash](https://github.com/AnotherSeawhite/sweepnslash)
+  - Amazing thanks to Sweep 'N Slash's developers and contributors for giving us explict permission to use their UI files, attack cooldowns wouldn't be possible without them :)
 
 ### Legal
 

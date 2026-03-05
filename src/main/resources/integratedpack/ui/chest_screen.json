@@ -1,0 +1,99 @@
+{
+    "small_chest_grid": {
+        "grid_dimensions": "$grid_dimensions",
+        "size": "$size",
+
+        "$grid_dimensions|default": [9, 3],
+        "$size|default": [162, 54],
+        "$container_title_copy": "$container_title",
+
+        "variables": [
+            {
+                "requires": "(not (($container_title_copy - '§z§1§r') = $container_title_copy))",
+                "$grid_dimensions": [9, 1],
+                "$size": [162, 18]
+            },
+            {
+                "requires": "(not (($container_title_copy - '§z§2§r') = $container_title_copy))",
+                "$grid_dimensions": [9, 2],
+                "$size": [162, 36]
+            },
+            {
+                "requires": "(not (($container_title_copy - '§z§3§r') = $container_title_copy))",
+                "$grid_dimensions": [9, 3],
+                "$size": [162, 54]
+            }
+        ]
+    },
+    "large_chest_grid": {
+        "grid_dimensions": "$grid_dimensions",
+        "size": "$size",
+
+        "$grid_dimensions|default": [9, 6],
+        "$size|default": [162, 108],
+        "$container_title_copy": "$container_title",
+
+        "variables": [
+            {
+                "requires": "(not (($container_title_copy - '§z§4§r') = $container_title_copy))",
+                "$grid_dimensions": [9, 4],
+                "$size": [162, 72]
+            },
+            {
+                "requires": "(not (($container_title_copy - '§z§5§r') = $container_title_copy))",
+                "$grid_dimensions": [9, 5],
+                "$size": [162, 90]
+            },
+            {
+                "requires": "(not (($container_title_copy - '§z§6§r') = $container_title_copy))",
+                "$grid_dimensions": [9, 6],
+                "$size": [162, 108]
+            }
+        ]
+    },
+
+    "small_chest_panel/root_panel": {
+        "size": "$size",
+
+        "$size|default": [176, 166],
+        "$container_title_copy": "$container_title",
+
+        "variables": [
+            {
+                "requires": "(not (($container_title_copy - '§z§1§r') = $container_title_copy))",
+                "$size": [176, 130]
+            },
+            {
+                "requires": "(not (($container_title_copy - '§z§2§r') = $container_title_copy))",
+                "$size": [176, 148]
+            },
+            {
+                "requires": "(not (($container_title_copy - '§z§3§r') = $container_title_copy))",
+                "$size": [176, 166]
+            }
+        ]
+    },
+
+    "large_chest_panel/root_panel": {
+        "$size|default": [176, 220],
+
+        "size": "$size",
+
+        "$container_title_copy": "$container_title",
+
+        "variables": [
+            {
+                "requires": "(not (($container_title_copy - '§z§4§r') = $container_title_copy))",
+                "$size": [176, 184]
+            },
+            {
+                "requires": "(not (($container_title_copy - '§z§5§r') = $container_title_copy))",
+                "$size": [176, 202]
+            },
+            {
+                "requires": "(not (($container_title_copy - '§z§6§r') = $container_title_copy))",
+                "$size": [176, 220]
+            }
+        ]
+    }
+}

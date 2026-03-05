@@ -1,0 +1,182 @@
+// Adapted from https://github.com/AnotherSeawhite/sweepnslash/blob/main/packs/RP/ui/sweepnslash/cooldown.json
+
+{
+    "namespace": "attack_indicator",
+    "cooldown_layout": {
+        "type": "image",
+        "layer": 2,
+        "$clip_max": 16.0,
+        "clips_children": false,
+        "clip_pixelperfect": true,
+        "bindings": [
+            {
+                "binding_type": "view",
+                "source_control_name": "data_control",
+                "resolve_sibling_scope": true,
+                "source_property_name": "(#preserved_text - $update_string)",
+                "target_property_name": "#texto"
+            },
+            {
+                "binding_type": "view",
+                "source_property_name": "(#texto - ('%.4s' * #texto))",
+                "target_property_name": "#texttonumber"
+            },
+            {
+                "binding_type": "view",
+                "source_property_name": "(#texttonumber * 1)",
+                "target_property_name": "#ratio"
+            },
+            {
+                "binding_type": "view",
+                "source_property_name": "(($clip_max - #ratio) / $clip_max)",
+                "target_property_name": "#clip_ratio"
+            },
+            {
+                "binding_type": "view",
+                "source_property_name": "(('%.3s' * #texto) = $prefix_string)",
+                "target_property_name": "#visible"
+            }
+        ]
+    },
+//    "cooldown_ready": {
+//        "type": "image",
+//        "layer": 3,
+//        "allow_clipping": false,
+//        "bindings": [
+//            {
+//                "binding_type": "view",
+//                "source_control_name": "data_control",
+//                "resolve_sibling_scope": true,
+//                "source_property_name": "(#preserved_text - $update_string)",
+//                "target_property_name": "#texto"
+//            },
+//            {
+//                "binding_type": "view",
+//                "source_property_name": "( (('%.1s' * (#texto - ('%.4s' * #texto))) = 't') and (('%.3s' * #texto) = $prefix_string) )",
+//                "target_property_name": "#visible"
+//            }
+//        ]
+//    },
+    "cooldown_crosshair": {
+        "type": "panel",
+        "size": [
+            16,
+            4
+        ],
+        "anchor_from": "bottom_middle",
+        "anchor_to": "top_middle",
+        "$prefix_string": "crs",
+        "controls": [
+            {
+                "data_control@attack_indicator.data_control": {}
+            },
+            {
+                "cooldown_crosshair_layout@attack_indicator.cooldown_layout": {
+                    "texture": "textures/geyser/ui/crosshair_attack_indicator_progress",
+                    "alpha": 0.5,
+                    "clip_direction": "left",
+                    "controls": [
+                        {
+                            "bar_bg": {
+                                "type": "image",
+                                "texture": "textures/geyser/ui/crosshair_attack_indicator_background",
+                                "alpha": 0.5,
+                                "layer": -1
+                            }
+                        }
+                    ]
+                }
+            }
+//            {
+//                "cooldown_ready_crosshair@attack_indicator.cooldown_ready": {
+//                    "texture": "textures/cooldown_crosshair_ready",
+//                    "alpha": 0.6,
+//                    "controls": [
+//                        {
+//                            "full_layout_with_alpha": {
+//                                "type": "image",
+//                                "texture": "textures/cooldown_crosshair_full",
+//                                "alpha": 0.2
+//                            }
+//                        }
+//                    ]
+//                }
+//            }
+        ]
+    },
+    "cooldown_hotbar": {
+        "type": "panel",
+        "size": [
+            18,
+            18
+        ],
+        "offset": [
+            4,
+            0
+        ],
+        "anchor_from": "right_middle",
+        "anchor_to": "left_middle",
+        "$prefix_string": "htb",
+        "controls": [
+            {
+                "data_control@attack_indicator.data_control": {}
+            },
+            {
+                "cooldown_hotbar_layout@attack_indicator.cooldown_layout": {
+                    "texture": "textures/geyser/ui/hotbar_attack_indicator_progress",
+                    "clip_direction": "down",
+                    "controls": [
+                        {
+                            "bar_bg": {
+                                "type": "image",
+                                "texture": "textures/geyser/ui/hotbar_attack_indicator_background",
+                                "layer": -1
+                            }
+                        }
+                    ]
+                }
+            }
+//            {
+//                "cooldown_ready_hotbar@attack_indicator.cooldown_ready": {
+//                    "texture": "textures/cooldown_hotbar_full"
+//                }
+//            }
+        ]
+    },
+    "cooldown_ui": {
+        "type": "panel",
+        "$update_string": "geyseropt:cooldown:",
+        "size": [
+            "100%",
+            "100%"
+        ],
+        "controls": [
+            {
+                "cooldown_crosshair@attack_indicator.cooldown_crosshair": {}
+            }
+        ]
+    },
+    "data_control": {
+        "type": "panel",
+        "size": [
+            0,
+            0
+        ],
+        "bindings": [
+            {
+                "binding_name": "#tip_text",
+                "binding_condition": "always"
+            },
+            {
+                "binding_name": "#tip_text",
+                "binding_name_override": "#preserved_text",
+                "binding_condition": "visibility_changed"
+            },
+            {
+                "binding_type": "view",
+                "source_property_name": "(not (#tip_text = #preserved_text) and not ((#tip_text - $update_string) = #tip_text))",
+                "target_property_name": "#visible"
+            }
+        ]
+    }
+}
