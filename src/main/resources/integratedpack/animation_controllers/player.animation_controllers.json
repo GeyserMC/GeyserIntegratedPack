@@ -103,7 +103,7 @@
 							"sneaking" : "query.is_sneaking && !query.is_sleeping"
 						},
 						{
-							"bob": "!variable.is_holding_spyglass && !variable.is_tooting_goat_horn && !variable.is_using_brush !(q.is_item_name_any('slot.weapon.offhand', 0, 'minecraft:spyglass') && q.is_emerging)"
+							"bob": "!variable.is_holding_spyglass && !variable.is_tooting_goat_horn && !variable.is_using_brush && !(q.is_item_name_any('slot.weapon.offhand', 0, 'minecraft:spyglass') && q.is_emerging)"
 						},
 						{
 							"damage_nearby_mobs" : "variable.damage_nearby_mobs"
