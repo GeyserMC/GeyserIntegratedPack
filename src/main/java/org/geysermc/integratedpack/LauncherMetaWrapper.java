@@ -3,6 +3,7 @@ package org.geysermc.integratedpack;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.security.MessageDigest;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ public class LauncherMetaWrapper {
                 if (!Files.exists(CLIENT_JAR) || !client.sha1.equals(getSha1(CLIENT_JAR))) {
                     // Download the client jar
                     try (InputStream in = WebUtils.request(client.url())) {
-                        Files.copy(in, CLIENT_JAR);
+                        Files.copy(in, CLIENT_JAR, StandardCopyOption.REPLACE_EXISTING);
                     } catch (Exception e) {
                         throw new RuntimeException("Could not download client jar", e);
                     }
