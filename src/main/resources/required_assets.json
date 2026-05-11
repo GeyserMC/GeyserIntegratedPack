@@ -1,0 +1,27 @@
+{
+    "files": {
+        "assets/minecraft/textures/entity/projectiles/spectral_arrow.png": "textures/geyser/entity/arrow/",
+        "assets/minecraft/textures/entity/rabbit/caerbannog.png": "textures/geyser/entity/rabbit/",
+        "assets/minecraft/textures/particle/damage.png": "textures/geyser/particle/",
+        "assets/minecraft/textures/particle/flash.png": "textures/geyser/particle/",
+        "assets/minecraft/textures/particle/nautilus.png": "textures/geyser/particle/",
+        "assets/minecraft/textures/entity/illager/illusioner.png": "textures/geyser/entity/illager/",
+        "assets/minecraft/textures/gui/sprites/hud/crosshair_attack_indicator_progress.png": "textures/geyser/ui/",
+        "assets/minecraft/textures/gui/sprites/hud/crosshair_attack_indicator_background.png": "textures/geyser/ui/",
+        "assets/minecraft/textures/gui/sprites/hud/hotbar_attack_indicator_progress.png": "textures/geyser/ui/",
+        "assets/minecraft/textures/gui/sprites/hud/hotbar_attack_indicator_background.png": "textures/geyser/ui/"
+    },
+    "assets": {
+        "minecraft/sounds/entity/player/attack/knockback1.ogg": "sounds/geyser/entity/player/attack/",
+        "minecraft/sounds/entity/player/attack/knockback2.ogg": "sounds/geyser/entity/player/attack/",
+        "minecraft/sounds/entity/player/attack/knockback3.ogg": "sounds/geyser/entity/player/attack/",
+        "minecraft/sounds/entity/player/attack/knockback4.ogg": "sounds/geyser/entity/player/attack/",
+        "minecraft/sounds/entity/player/attack/sweep1.ogg": "sounds/geyser/entity/player/attack/",
+        "minecraft/sounds/entity/player/attack/sweep2.ogg": "sounds/geyser/entity/player/attack/",
+        "minecraft/sounds/entity/player/attack/sweep3.ogg": "sounds/geyser/entity/player/attack/",
+        "minecraft/sounds/entity/player/attack/sweep4.ogg": "sounds/geyser/entity/player/attack/",
+        "minecraft/sounds/entity/player/attack/sweep5.ogg": "sounds/geyser/entity/player/attack/",
+        "minecraft/sounds/entity/player/attack/sweep6.ogg": "sounds/geyser/entity/player/attack/",
+        "minecraft/sounds/entity/player/attack/sweep7.ogg": "sounds/geyser/entity/player/attack/"
+    }
+}

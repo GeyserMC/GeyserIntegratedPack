@@ -25,6 +25,10 @@
 
 package org.geysermc.integratedpack;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -86,6 +90,16 @@ public class Resources {
         String text = new String(is.readAllBytes(), charset);
         is.close();
         return text;
+    }
+
+    /**
+     * Returns a resource as a JsonElement.
+     *
+     * @param resourcePath The path to the resource in the JAR file.
+     * @return The resource as a JsonElement.
+     */
+    public static JsonElement getAsJson(String resourcePath) throws IOException {
+        return JsonParser.parseString(getAsText(resourcePath));
     }
 
     /**

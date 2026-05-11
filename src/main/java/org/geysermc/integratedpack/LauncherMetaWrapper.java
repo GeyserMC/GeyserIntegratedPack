@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public class LauncherMetaWrapper {
+    public static Assets ASSETS = new Assets(Map.of());
+
     private static final Path CLIENT_JAR = IntegratedPack.TEMP_PATH.resolve("client.jar");
     private static final String LAUNCHER_META_URL = "https://launchermeta.mojang.com/mc/game/version_manifest.json";
 
@@ -30,6 +32,8 @@ public class LauncherMetaWrapper {
                 } else {
                     IntegratedPack.log("Client jar already exists and is up to date.");
                 }
+
+                ASSETS = Constants.GSON.fromJson(WebUtils.getAsString(versionInfo.assetIndex().url()), Assets.class);
             }
         }
 
@@ -80,12 +84,30 @@ public class LauncherMetaWrapper {
         String type,
         String time,
         String releaseTime,
-        Map<String, VersionDownload> downloads
+        Map<String, VersionDownload> downloads,
+        AssetIndex assetIndex
     ) {}
 
     public record VersionDownload(
         String sha1,
         int size,
         String url
+    ) {}
+
+    public record AssetIndex(
+        String id,
+        String sha1,
+        int size,
+        int totalSize,
+        String url
+    ) {}
+
+    public record Assets(
+            Map<String, Asset> objects
+    ) {}
+
+    public record Asset(
+            String hash,
+            int size
     ) {}
 }
