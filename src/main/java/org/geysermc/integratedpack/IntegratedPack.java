@@ -68,7 +68,7 @@ public class IntegratedPack {
             // there are probably better ways to do this, but this is the way im doing it
             Resources.extractFolder("integratedpack", WORKING_PATH);
 
-            // Step 2: Download the 1.21.8 client.jar and copy all files needed to working folder
+            // Step 2: Download the client jar and copy all files needed to working folder
             File jarFile = LauncherMetaWrapper.getLatest().toFile();
 
             ZipFile clientJar = new ZipFile(jarFile);
