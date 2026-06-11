@@ -8,3 +8,8 @@ assets/minecraft/textures/gui/sprites/hud/crosshair_attack_indicator_progress.pn
 assets/minecraft/textures/gui/sprites/hud/crosshair_attack_indicator_background.png textures/geyser/ui/
 assets/minecraft/textures/gui/sprites/hud/hotbar_attack_indicator_progress.png textures/geyser/ui/
 assets/minecraft/textures/gui/sprites/hud/hotbar_attack_indicator_background.png textures/geyser/ui/
+assets/minecraft/textures/block/test_block_accept.png textures/geyser/block/
+assets/minecraft/textures/block/test_block_fail.png textures/geyser/block/
+assets/minecraft/textures/block/test_block_log.png textures/geyser/block/
+assets/minecraft/textures/block/test_block_start.png textures/geyser/block/
+assets/minecraft/textures/block/test_instance_block.png textures/geyser/block/
