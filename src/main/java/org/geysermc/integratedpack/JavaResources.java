@@ -25,6 +25,9 @@
 
 package org.geysermc.integratedpack;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -34,6 +37,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Map;
 import java.util.zip.ZipFile;
 
 public class JavaResources {
@@ -48,12 +52,14 @@ public class JavaResources {
         CLIENT_JAR = clientJar;
 
         try {
+            // Get the assets we need
+            JsonObject requiredAssets = Resources.getAsJson("required_assets.json").getAsJsonObject();
+
             // Get the files we need to copy from the jar to the pack.
-            String str = Resources.getAsText("required_files.txt");
-            for (String line : str.lines().toList()) {
-                String[] paths = line.split(" ");
-                String jarAssetPath = paths[0];
-                String destinationPath = paths[1];
+            JsonObject requiredJarFiles = requiredAssets.getAsJsonObject("files");
+            for (Map.Entry<String, JsonElement> entry : requiredJarFiles.entrySet()) {
+                String jarAssetPath = entry.getKey();
+                String destinationPath = entry.getValue().getAsString();
                 InputStream asset = getAsStream(jarAssetPath);
 
                 IntegratedPack.log("Copying " + jarAssetPath + " to " + destinationPath + "...");
@@ -72,6 +78,44 @@ public class JavaResources {
                 Files.copy(asset, destination, StandardCopyOption.REPLACE_EXISTING);
             }
 
+            // Get other assets which are not included in the jar file
+            JsonObject requiredRemoteAssets = requiredAssets.getAsJsonObject("assets");
+            for (Map.Entry<String, JsonElement> entry : requiredRemoteAssets.entrySet()) {
+                String remoteAssetPath = entry.getKey();
+                String destinationPath = entry.getValue().getAsString();
+
+                LauncherMetaWrapper.Asset asset = LauncherMetaWrapper.ASSETS.objects().get(remoteAssetPath);
+                if (asset == null) {
+                    IntegratedPack.log("WARNING: Unable to find %s in the asset index.".formatted(remoteAssetPath));
+                    continue;
+                }
+
+                String bytes = asset.hash().substring(0, 2);
+
+                InputStream assetStream = WebUtils.request("https://resources.download.minecraft.net/%s/%s"
+                        .formatted(bytes, asset.hash()));
+
+                IntegratedPack.log("Downloading " + remoteAssetPath + " to " + destinationPath + "...");
+
+                String assetFileName = Path.of(remoteAssetPath).toFile().getName();
+                Path destination = IntegratedPack.WORKING_PATH.resolve(destinationPath).resolve(assetFileName);
+
+                File destinationFolder = IntegratedPack.WORKING_PATH.resolve(destinationPath).toFile();
+                if (!destinationFolder.exists()) {
+                    if (!destinationFolder.mkdirs()) {
+                        IntegratedPack.log("Could not make directories for downloading " + remoteAssetPath + " to " + destinationPath + "!");
+                        continue;
+                    }
+                }
+
+                Files.copy(assetStream, destination, StandardCopyOption.REPLACE_EXISTING);
+                try {
+                    assetStream.close();
+                } catch (IOException e) {
+                    IntegratedPack.log("Failed to close input stream, see stacktrace below, continuing...");
+                    e.printStackTrace();
+                }
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
