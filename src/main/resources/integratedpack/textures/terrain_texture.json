@@ -11,6 +11,29 @@
         "textures/blocks/structure_block_data",
         "textures/blocks/structure_block_export"
       ]
+    },
+    "mushroom_block_skin_brown": {
+      "textures": "textures/blocks/mushroom_block_skin_brown"
+    },
+    "mushroom_block_skin_red": {
+      "textures": "textures/blocks/mushroom_block_skin_red"
+    },
+    "mushroom_block_inside": {
+      "textures": "textures/blocks/mushroom_block_inside"
+    },
+    "mushroom_block_skin_stem": {
+      "textures": "textures/blocks/mushroom_block_skin_stem"
+    },
+    "test_block": {
+      "textures": [
+        "textures/geyser/block/test_block_start",
+        "textures/geyser/block/test_block_log",
+        "textures/geyser/block/test_block_fail",
+        "textures/geyser/block/test_block_accept"
+      ]
+    },
+    "test_instance_block": {
+      "textures": "textures/geyser/block/test_instance_block"
     }
   }
 }
