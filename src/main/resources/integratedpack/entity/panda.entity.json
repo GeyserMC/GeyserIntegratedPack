@@ -11,10 +11,18 @@
         "playful": "textures/entity/panda/panda_playful",
         "brown": "textures/entity/panda/panda_brown",
         "weak": "textures/entity/panda/panda_sneezy",
-        "aggressive": "textures/entity/panda/panda_aggressive"
+        "aggressive": "textures/entity/panda/panda_aggressive",
+        "baby_default": "textures/entity/panda/panda_baby",
+        "baby_lazy": "textures/entity/panda/panda_lazy_baby",
+        "baby_worried": "textures/entity/panda/panda_worried_baby",
+        "baby_playful": "textures/entity/panda/panda_playful_baby",
+        "baby_brown": "textures/entity/panda/panda_brown_baby",
+        "baby_weak": "textures/entity/panda/panda_weak_baby",
+        "baby_aggressive": "textures/entity/panda/panda_aggressive_baby"
       },
       "geometry": {
-        "default": "geometry.panda"
+        "default": "geometry.panda",
+        "baby": "geometry.panda.baby"
       },
       "particle_effects": {
         "sneeze": "geyseropt:sneeze"
@@ -28,25 +36,35 @@
         "sitting": "animation.panda.sitting",
         "rolling": "animation.panda.rolling",
         "lying": "animation.panda.lying",
-        "controller.move": "controller.animation.panda.move",
-        "controller.unhappy": "controller.animation.panda.unhappy",
-        "controller.baby": "controller.animation.panda.baby"
+        "baby_sitting": "animation.panda.baby_sitting",
+        "baby_rolling": "animation.panda.baby_rolling",
+        "baby_lying": "animation.panda.baby_lying"
       },
       "scripts": {
         "pre_animation": [
           "v.geyser_sneezing = q.sneeze_counter > 0 ? 1 : (v.geyser_sneezing ?? 0);"
         ],
         "animate": [
-          "controller.move",
-          "controller.unhappy",
-          "controller.baby",
           {"geyser_sneezing": "v.geyser_sneezing"}
-        ]
+        ],
+        "scale": "query.is_baby ? (1 / 0.4) : 1.0"
       },
-      "render_controllers": [ "controller.render.panda" ],
+      "animation_controllers": [
+        {
+          "move": "controller.animation.panda.move"
+        },
+        {
+          "unhappy": "controller.animation.panda.unhappy"
+        },
+        {
+          "sneezing": "controller.animation.panda.sneezing"
+        }
+      ],
+      "render_controllers": [
+        "controller.render.panda.v2"
+      ],
       "spawn_egg": {
-        "texture": "spawn_egg",
-        "texture_index": 54
+        "texture": "spawn_egg_panda"
       }
     }
   }
