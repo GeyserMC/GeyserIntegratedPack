@@ -13,6 +13,7 @@ repositories {
 dependencies {
     implementation("com.google.code.gson:gson:2.13.1")
     implementation("org.reflections:reflections:0.10.2")
+    implementation("org.cloudburstmc:nbt:3.0.5.Final")
 }
 
 tasks {
