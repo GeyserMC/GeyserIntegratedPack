@@ -25,6 +25,10 @@
 
 package org.geysermc.integratedpack;
 
+import org.cloudburstmc.nbt.NBTInputStream;
+import org.cloudburstmc.nbt.NbtMap;
+import org.cloudburstmc.nbt.NbtUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.*;
@@ -88,6 +92,34 @@ public class WebUtils {
     public static String getAsString(String url) {
         try {
             return getAsString(URI.create(url).toURL());
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Requests a URL and returns the data as an NbtMap.
+     *
+     * @param url The URL to request.
+     * @return The data of the requested URL as an NbtMap.
+     */
+    public static NbtMap getAsNbt(URL url) {
+        try (InputStream request = request(url); NBTInputStream nbtStream = NbtUtils.createNetworkReader(request)) {
+            return (NbtMap) nbtStream.readTag();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Requests a URL and returns the data as an NbtMap.
+     *
+     * @param url The URL to request.
+     * @return The data of the requested URL as an NbtMap.
+     */
+    public static NbtMap getAsNbt(String url) {
+        try {
+            return getAsNbt(URI.create(url).toURL());
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
