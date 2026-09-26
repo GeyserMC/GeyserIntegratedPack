@@ -1,17 +1,5 @@
 {
   "format_version": [1, 1, 0],
-  "geyser_custom:obsidian": {
-    "sound": "stone",
-    "textures": "obsidian",
-    "isotropic": true,
-    "ambient_occlusion_exponent": 2.0
-  },
-  "geyser_custom:crying_obsidian": {
-    "sound": "stone",
-    "textures": "crying_obsidian",
-    "isotropic": true,
-    "ambient_occlusion_exponent": 2.0
-  },
   "geyser_custom:brown_mushroom_block": {
     "sound": "wood"
   },
