@@ -3,11 +3,14 @@ package org.geysermc.integratedpack;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.security.MessageDigest;
 import java.util.List;
 import java.util.Map;
 
 public class LauncherMetaWrapper {
+    public static Assets ASSETS = new Assets(Map.of());
+
     private static final Path CLIENT_JAR = IntegratedPack.TEMP_PATH.resolve("client.jar");
     private static final String LAUNCHER_META_URL = "https://launchermeta.mojang.com/mc/game/version_manifest.json";
 
@@ -23,13 +26,15 @@ public class LauncherMetaWrapper {
                 if (!Files.exists(CLIENT_JAR) || !client.sha1.equals(getSha1(CLIENT_JAR))) {
                     // Download the client jar
                     try (InputStream in = WebUtils.request(client.url())) {
-                        Files.copy(in, CLIENT_JAR);
+                        Files.copy(in, CLIENT_JAR, StandardCopyOption.REPLACE_EXISTING);
                     } catch (Exception e) {
                         throw new RuntimeException("Could not download client jar", e);
                     }
                 } else {
                     IntegratedPack.log("Client jar already exists and is up to date.");
                 }
+
+                ASSETS = Constants.GSON.fromJson(WebUtils.getAsString(versionInfo.assetIndex().url()), Assets.class);
             }
         }
 
@@ -80,12 +85,30 @@ public class LauncherMetaWrapper {
         String type,
         String time,
         String releaseTime,
-        Map<String, VersionDownload> downloads
+        Map<String, VersionDownload> downloads,
+        AssetIndex assetIndex
     ) {}
 
     public record VersionDownload(
         String sha1,
         int size,
         String url
+    ) {}
+
+    public record AssetIndex(
+        String id,
+        String sha1,
+        int size,
+        int totalSize,
+        String url
+    ) {}
+
+    public record Assets(
+            Map<String, Asset> objects
+    ) {}
+
+    public record Asset(
+            String hash,
+            int size
     ) {}
 }

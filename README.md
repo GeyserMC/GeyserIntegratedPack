@@ -24,6 +24,9 @@ Bedrock resource pack to extend Geyser functionality. Learn more on its [wiki pa
   - Structure block options that do not exist on Java
 - 1, 2, 4 and 5 row chests, removing the need for the filler item
 - Proper attack cooldowns
+- Proper combat sounds
+  - Sweep attacks
+  - Knockback attacks
 
 Download: [GeyserIntegratedPack.mcpack](https://download.geysermc.org/v2/projects/geyserintegratedpack/versions/latest/builds/latest/downloads/geyserintegratedpack)
 
