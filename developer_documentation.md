@@ -14,7 +14,6 @@
    * [Skeleton horses](#Skeleton-horses)
    * [Spectral arrow entities](#Spectral-arrow-entities)
    * [Spyglass animations](#Spyglass-animations)
-   * [Zombie villager textures](#Zombie-villager-textures)
    * [UI modifications](#ui-modifications)
    * [Structure block texture changes (MCPE-48224)](#structure-block-texture-changes-mcpe-48224)
    * [Cherry Fence Gate Sound Fix (MCPE-168021)](#cherry-fence-gate-sound-fix-mcpe-168021)
@@ -307,11 +306,6 @@ Lastly, the spyglass animation must be modified to account for the spyglass bein
 
 Unfortunately, the spyglass cannot actually be used in the offhand by Bedrock players, as the triggering of the first person "animation" for it is hardcoded on the client side. However, these changes allow the spyglass to be properly displayed when in the offhand of a Bedrock player, as well as when used in the offhand of a Java player. Furthermore, `q.is_emerging` could be utilized by other resource pack creators working with Geyser to identify if an item is being used in the offhand.
 
-
-### Zombie villager textures
-
-Like villagers, zombie villagers in Java Edition have visible biome and profession variants. It appears that initial implementation of this was started in the Bedrock vanilla resources, given the presence of the entity with the identifier `minecraft:zombie_villager_v2`. However, the textures specified in this vanilla entity definition appear to be entirely blank TGA files. Luckily, the profession textures of zombie villagers and villagers are essentially identical, so the entity definition was updated to reference the villager profession textures. 
-Zombie villagers, like villagers, have a profession level. This is implemented by adding the same vanilla render controller used to create this effect in the villager entity, `controller.render.villager_v2_level`. The remainder of the entity definition is unchanged.
 
 ### UI modifications
 Some inventories have added functionality on Bedrock, that does not exist on Java edition. For example, this includes:

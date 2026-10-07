@@ -1,0 +1,30 @@
+{
+  "format_version": [1, 1, 0],
+  "geyser_custom:obsidian": {
+    "sound": "stone",
+    "textures": "obsidian",
+    "isotropic": true,
+    "ambient_occlusion_exponent": 2.0
+  },
+  "geyser_custom:crying_obsidian": {
+    "sound": "stone",
+    "textures": "crying_obsidian",
+    "isotropic": true,
+    "ambient_occlusion_exponent": 2.0
+  },
+  "geyser_custom:brown_mushroom_block": {
+    "sound": "wood"
+  },
+  "geyser_custom:red_mushroom_block": {
+    "sound": "wood"
+  },
+  "geyser_custom:mushroom_stem": {
+    "sound": "wood"
+  },
+  "geyser_custom:test_block": {
+    "textures": "test_block"
+  },
+  "geyser_custom:test_instance_block": {
+    "textures": "test_instance_block"
+  }
+}
