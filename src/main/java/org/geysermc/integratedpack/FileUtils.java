@@ -51,7 +51,8 @@ public class FileUtils {
         Files.walkFileTree(sourceFolderPath, new SimpleFileVisitor<>() {
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                zos.putNextEntry(new ZipEntry(sourceFolderPath.relativize(file).toString()));
+                String entryName = sourceFolderPath.relativize(file).toString().replace('\\', '/');
+                zos.putNextEntry(new ZipEntry(entryName));
                 Files.copy(file, zos);
                 zos.closeEntry();
                 return FileVisitResult.CONTINUE;
