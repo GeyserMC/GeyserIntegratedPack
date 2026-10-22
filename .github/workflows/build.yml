@@ -7,6 +7,7 @@ on:
       - '.gitignore'
       - 'LICENSE'
       - 'README.md'
+  pull_request:
 
 jobs:
   build:
@@ -20,7 +21,7 @@ jobs:
 
       - name: Build and run with Gradle
         run: ./gradlew run
-      
+        
       - name: Archive resource pack artifact
         # See https://github.com/actions/upload-artifact/commits
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
@@ -28,16 +29,33 @@ jobs:
         with:
           name: GeyserIntegratedPack
           path: GeyserIntegratedPack.mcpack
-          
+
+  release:
+    needs: build
+    if: ${{ github.event_name != 'pull_request' && github.ref_name == 'master' }}
+    runs-on: ubuntu-latest
+
+    outputs:
+      version: ${{ steps.get-version.outputs.VERSION }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Get Version
-        if: ${{ success() && github.repository == 'GeyserMC/GeyserIntegratedPack' && github.ref_name == 'master' }}
+        if: success()
         id: get-version
         run: |
           version=$(cat src/main/resources/integratedpack/manifest.json | jq -r '.header.version | join(".")')
           echo "VERSION=${version}" >> $GITHUB_OUTPUT
 
+      - name: Download resource pack artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: GeyserIntegratedPack
+
       - name: Get Release Metadata
-        if: ${{ success() && github.repository == 'GeyserMC/GeyserIntegratedPack' && github.ref_name == 'master' }}
+        if: success()
         uses: GeyserMC/actions/release@master
         id: metadata
         with:
@@ -45,13 +63,23 @@ jobs:
           appPrivateKey: ${{ secrets.RELEASE_APP_PK }}
           files: |
             geyserintegratedpack:GeyserIntegratedPack.mcpack
-          releaseEnabled: false
+          releaseEnabled: true
           saveMetadata: true
           releaseProject: 'geyserintegratedpack'
           releaseVersion: ${{ steps.get-version.outputs.VERSION }}
 
+  publish:
+    needs: [build, release]
+    if: ${{ github.event_name != 'pull_request' && github.repository == 'GeyserMC/GeyserIntegratedPack' && github.ref_name == 'master' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download resource pack artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: GeyserIntegratedPack
+
       - name: Publish to Downloads API
-        if: ${{ success() && github.repository == 'GeyserMC/GeyserIntegratedPack' && github.ref_name == 'master' }}
         uses: GeyserMC/actions/upload-release@master
         with:
           username: ${{ vars.DOWNLOADS_USERNAME }}
