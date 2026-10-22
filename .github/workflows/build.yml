@@ -36,15 +36,15 @@ jobs:
 
       # --- Push or Dispatch Steps ---
       - name: Get Version
-        if: ${{ success() && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
+        if: ${{ success() && github.ref_name == 'master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
         id: get-version
         run: |
           version=$(cat src/main/resources/integratedpack/manifest.json | jq -r '.header.version | join(".")')
           echo "VERSION=${version}" >> $GITHUB_OUTPUT
 
-      # GitHub Release using softprops/action-gh-release (Works for main repo & forks)
+      # GitHub Release using softprops/action-gh-release (Runs on master for any repo/fork, no repo check)
       - name: Make or Update GitHub Release
-        if: ${{ success() && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
+        if: ${{ success() && github.ref_name == 'master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.get-version.outputs.VERSION }}
@@ -54,7 +54,7 @@ jobs:
 
       # --- Main Repository Only: Downloads API ---
       - name: Get Release Metadata for Downloads API
-        if: ${{ success() && github.repository == 'GeyserMC/GeyserIntegratedPack' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
+        if: ${{ success() && github.repository == 'GeyserMC/GeyserIntegratedPack' && github.ref_name == 'master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
         uses: GeyserMC/actions/release@master
         id: metadata
         with:
@@ -68,7 +68,7 @@ jobs:
           releaseVersion: ${{ steps.get-version.outputs.VERSION }}
 
       - name: Publish to Downloads API
-        if: ${{ success() && github.repository == 'GeyserMC/GeyserIntegratedPack' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
+        if: ${{ success() && github.repository == 'GeyserMC/GeyserIntegratedPack' && github.ref_name == 'master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
         uses: GeyserMC/actions/upload-release@master
         with:
           username: ${{ vars.DOWNLOADS_USERNAME }}
