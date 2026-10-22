@@ -7,6 +7,7 @@ on:
       - '.gitignore'
       - 'LICENSE'
       - 'README.md'
+  pull_request:
 
 jobs:
   build:
@@ -20,7 +21,7 @@ jobs:
 
       - name: Build and run with Gradle
         run: ./gradlew run
-      
+
       - name: Archive resource pack artifact
         # See https://github.com/actions/upload-artifact/commits
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
@@ -28,16 +29,29 @@ jobs:
         with:
           name: GeyserIntegratedPack
           path: GeyserIntegratedPack.mcpack
-          
+
+      # --- Push or Dispatch: Release & Downloads API Publishing ---
       - name: Get Version
-        if: ${{ success() && github.repository == 'GeyserMC/GeyserIntegratedPack' && github.ref_name == 'master' }}
+        if: ${{ success() && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
         id: get-version
         run: |
           version=$(cat src/main/resources/integratedpack/manifest.json | jq -r '.header.version | join(".")')
           echo "VERSION=${version}" >> $GITHUB_OUTPUT
 
-      - name: Get Release Metadata
-        if: ${{ success() && github.repository == 'GeyserMC/GeyserIntegratedPack' && github.ref_name == 'master' }}
+      - name: Make or Update GitHub Release
+        if: ${{ success() && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
+        uses: GeyserMC/actions/release@master
+        with:
+          appID: ${{ secrets.RELEASE_APP_ID }}
+          appPrivateKey: ${{ secrets.RELEASE_APP_PK }}
+          files: |
+            geyserintegratedpack:GeyserIntegratedPack.mcpack
+          releaseEnabled: true
+          releaseProject: 'geyserintegratedpack'
+          releaseVersion: ${{ steps.get-version.outputs.VERSION }}
+
+      - name: Get Release Metadata for Downloads API
+        if: ${{ success() && github.repository == 'GeyserMC/GeyserIntegratedPack' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
         uses: GeyserMC/actions/release@master
         id: metadata
         with:
@@ -51,7 +65,7 @@ jobs:
           releaseVersion: ${{ steps.get-version.outputs.VERSION }}
 
       - name: Publish to Downloads API
-        if: ${{ success() && github.repository == 'GeyserMC/GeyserIntegratedPack' && github.ref_name == 'master' }}
+        if: ${{ success() && github.repository == 'GeyserMC/GeyserIntegratedPack' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
         uses: GeyserMC/actions/upload-release@master
         with:
           username: ${{ vars.DOWNLOADS_USERNAME }}
