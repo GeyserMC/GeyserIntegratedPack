@@ -12,8 +12,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed for softprops/action-gh-release to create/update releases
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Setup Gradle
         uses: GeyserMC/actions/setup-gradle-composite@master
         with:
@@ -23,14 +28,13 @@ jobs:
         run: ./gradlew run
 
       - name: Archive resource pack artifact
-        # See https://github.com/actions/upload-artifact/commits
-        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
+        uses: actions/upload-artifact@v4
         if: success()
         with:
           name: GeyserIntegratedPack
           path: GeyserIntegratedPack.mcpack
 
-      # --- Push or Dispatch: Release & Downloads API Publishing ---
+      # --- Push or Dispatch Steps ---
       - name: Get Version
         if: ${{ success() && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
         id: get-version
@@ -38,18 +42,17 @@ jobs:
           version=$(cat src/main/resources/integratedpack/manifest.json | jq -r '.header.version | join(".")')
           echo "VERSION=${version}" >> $GITHUB_OUTPUT
 
+      # GitHub Release using softprops/action-gh-release (Works for main repo & forks)
       - name: Make or Update GitHub Release
         if: ${{ success() && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
-        uses: GeyserMC/actions/release@master
+        uses: softprops/action-gh-release@v2
         with:
-          appID: ${{ secrets.RELEASE_APP_ID }}
-          appPrivateKey: ${{ secrets.RELEASE_APP_PK }}
-          files: |
-            geyserintegratedpack:GeyserIntegratedPack.mcpack
-          releaseEnabled: true
-          releaseProject: 'geyserintegratedpack'
-          releaseVersion: ${{ steps.get-version.outputs.VERSION }}
+          tag_name: v${{ steps.get-version.outputs.VERSION }}
+          name: v${{ steps.get-version.outputs.VERSION }}
+          files: GeyserIntegratedPack.mcpack
+          generate_release_notes: true
 
+      # --- Main Repository Only: Downloads API ---
       - name: Get Release Metadata for Downloads API
         if: ${{ success() && github.repository == 'GeyserMC/GeyserIntegratedPack' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}
         uses: GeyserMC/actions/release@master
