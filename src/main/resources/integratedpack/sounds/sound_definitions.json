@@ -20,6 +20,62 @@
         "sounds/block/cherry_wood_fence_gate/toggle2",
         "sounds/block/cherry_wood_fence_gate/toggle3"
       ]
+    },
+    "geyseropt.entity.player.attack.knockback": {
+      "category": "player",
+      "max_distance": null,
+      "min_distance": null,
+      "sounds": [
+        {
+          "load_on_low_memory": true,
+          "name": "sounds/geyser/entity/player/attack/knockback1",
+          "volume": 0.7
+        },
+        {
+          "name": "sounds/geyser/entity/player/attack/knockback2",
+          "volume": 0.7
+        },
+        {
+          "name": "sounds/geyser/entity/player/attack/knockback3",
+          "volume": 0.7
+        }
+      ]
+    },
+    "geyseropt.entity.player.attack.sweep": {
+      "category": "player",
+      "max_distance": null,
+      "min_distance": null,
+      "sounds": [
+        {
+          "load_on_low_memory": true,
+          "name": "sounds/geyser/entity/player/attack/sweep1",
+          "volume": 0.7
+        },
+        {
+          "name": "sounds/geyser/entity/player/attack/sweep2",
+          "volume": 0.7
+        },
+        {
+          "name": "sounds/geyser/entity/player/attack/sweep3",
+          "volume": 0.7
+        },
+        {
+          "name": "sounds/geyser/entity/player/attack/sweep4",
+          "volume": 0.7
+        },
+        {
+          "name": "sounds/geyser/entity/player/attack/sweep5",
+          "volume": 0.7
+        },
+        {
+          "name": "sounds/geyser/entity/player/attack/sweep6",
+          "volume": 0.7
+        },
+        {
+          "name": "sounds/geyser/entity/player/attack/sweep7",
+          "volume": 0.7
+        }
+      ]
     }
   }
 }
