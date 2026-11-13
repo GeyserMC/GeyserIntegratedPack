@@ -1,0 +1,111 @@
+{
+  "resource_pack_name": "geyserintegratedpack",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "geyser_wooden_sword": {
+      "textures": "textures/items/wood_sword"
+    },
+    "geyser_wooden_shovel": {
+      "textures": "textures/items/wood_shovel"
+    },
+    "geyser_wooden_pickaxe": {
+      "textures": "textures/items/wood_pickaxe"
+    },
+    "geyser_wooden_axe": {
+      "textures": "textures/items/wood_axe"
+    },
+    "geyser_wooden_hoe": {
+      "textures": "textures/items/wood_hoe"
+    },
+    "geyser_copper_sword": {
+      "textures": "textures/items/copper_sword"
+    },
+    "geyser_copper_shovel": {
+      "textures": "textures/items/copper_shovel"
+    },
+    "geyser_copper_pickaxe": {
+      "textures": "textures/items/copper_pickaxe"
+    },
+    "geyser_copper_axe": {
+      "textures": "textures/items/copper_axe"
+    },
+    "geyser_copper_hoe": {
+      "textures": "textures/items/copper_hoe"
+    },
+    "geyser_stone_sword": {
+      "textures": "textures/items/stone_sword"
+    },
+    "geyser_stone_shovel": {
+      "textures": "textures/items/stone_shovel"
+    },
+    "geyser_stone_pickaxe": {
+      "textures": "textures/items/stone_pickaxe"
+    },
+    "geyser_stone_axe": {
+      "textures": "textures/items/stone_axe"
+    },
+    "geyser_stone_hoe": {
+      "textures": "textures/items/stone_hoe"
+    },
+    "geyser_golden_sword": {
+      "textures": "textures/items/gold_sword"
+    },
+    "geyser_golden_shovel": {
+      "textures": "textures/items/gold_shovel"
+    },
+    "geyser_golden_pickaxe": {
+      "textures": "textures/items/gold_pickaxe"
+    },
+    "geyser_golden_axe": {
+      "textures": "textures/items/gold_axe"
+    },
+    "geyser_golden_hoe": {
+      "textures": "textures/items/gold_hoe"
+    },
+    "geyser_iron_sword": {
+      "textures": "textures/items/iron_sword"
+    },
+    "geyser_iron_shovel": {
+      "textures": "textures/items/iron_shovel"
+    },
+    "geyser_iron_pickaxe": {
+      "textures": "textures/items/iron_pickaxe"
+    },
+    "geyser_iron_axe": {
+      "textures": "textures/items/iron_axe"
+    },
+    "geyser_iron_hoe": {
+      "textures": "textures/items/iron_hoe"
+    },
+    "geyser_diamond_sword": {
+      "textures": "textures/items/diamond_sword"
+    },
+    "geyser_diamond_shovel": {
+      "textures": "textures/items/diamond_shovel"
+    },
+    "geyser_diamond_pickaxe": {
+      "textures": "textures/items/diamond_pickaxe"
+    },
+    "geyser_diamond_axe": {
+      "textures": "textures/items/diamond_axe"
+    },
+    "geyser_diamond_hoe": {
+      "textures": "textures/items/diamond_hoe"
+    },
+    "geyser_netherite_sword": {
+      "textures": "textures/items/netherite_sword"
+    },
+    "geyser_netherite_shovel": {
+      "textures": "textures/items/netherite_shovel"
+    },
+    "geyser_netherite_pickaxe": {
+      "textures": "textures/items/netherite_pickaxe"
+    },
+    "geyser_netherite_axe": {
+      "textures": "textures/items/netherite_axe"
+    },
+    "geyser_netherite_hoe": {
+      "textures": "textures/items/netherite_hoe"
+    }
+  }
+}

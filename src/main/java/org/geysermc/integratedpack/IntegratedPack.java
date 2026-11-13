@@ -62,6 +62,13 @@ public class IntegratedPack {
         try {
             log("===GeyserIntegratedPack Compiler===");
 
+            if (WORKING_PATH.toFile().exists()) {
+                // Delete the temp folder here juuuust in case the failed run was related to
+                // a corrupt client.jar!
+                log("Previous run failed, deleting temp folder and recompiling...");
+                FileUtils.deleteDirectory(TEMP_PATH.toFile());
+            }
+
             // Step 1: Extract the GeyserIntegratedPack data to a working folder
 
             log("Extracting pre-made integrated pack data to folder...");
