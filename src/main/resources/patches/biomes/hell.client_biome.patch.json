@@ -1,0 +1,9 @@
+{
+  "minecraft:client_biome": {
+    "components": {
+      "minecraft:sky_color": {
+        "sky_color": [51, 8, 8]
+      }
+    }
+  }
+}
