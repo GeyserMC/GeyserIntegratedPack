@@ -9,6 +9,7 @@ import org.geysermc.integratedpack.FileUtils;
 import org.geysermc.integratedpack.IntegratedPack;
 import org.geysermc.integratedpack.Resources;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -55,7 +56,14 @@ public class JsonPatchRenderer implements Renderer {
 
         JsonObject merged = mergeJsonObjects(sourceJson, patchJson);
 
-        try (FileWriter writer = new FileWriter(IntegratedPack.WORKING_PATH.resolve(realPath).toFile())) {
+        File outputFile = IntegratedPack.WORKING_PATH.resolve(realPath).toFile();
+        File outputFileParent = outputFile.getParentFile();
+
+        if (!outputFileParent.exists() && !outputFileParent.mkdirs()) {
+            throw new IOException("Failed to create directory: " + outputFileParent);
+        }
+
+        try (FileWriter writer = new FileWriter(outputFile)) {
             writer.write(Constants.GSON.toJson(merged));
         }
     }
